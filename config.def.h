@@ -75,11 +75,11 @@ static unsigned int cursorthickness = 2;
  *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
  * 0: disable (render all U25XX glyphs normally from the font).
  */
-const int boxdraw = 0;
+const int boxdraw = 1;
 const int boxdraw_bold = 0;
 
 /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
-const int boxdraw_braille = 0;
+const int boxdraw_braille = 1;
 
 /*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
@@ -106,7 +106,7 @@ char *termname = "st-256color";
  *	stty tabs
  */
 unsigned int tabspaces = 8;
-
+         
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
@@ -141,9 +141,9 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 256;
+unsigned int defaultfg = 257;
+unsigned int defaultbg = 256;
+static unsigned int defaultcs = 257;
 static unsigned int defaultrcs = 257;
 
 /*
@@ -205,7 +205,7 @@ ResourcePref resources[] = {
 		{ "color15",      STRING,  &colorname[15] },
 		{ "background",   STRING,  &colorname[256] },
 		{ "foreground",   STRING,  &colorname[257] },
-		{ "cursorColor",  STRING,  &colorname[258] },
+		{ "cursorColor",  STRING,  &colorname[257] },
 		{ "termname",     STRING,  &termname },
 		{ "shell",        STRING,  &shell },
 		{ "minlatency",   INTEGER, &minlatency },
@@ -243,15 +243,15 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
+	{ MODKEY,               XK_Prior,        zoom,           {.f = +1} },
+	{ MODKEY,               XK_Next,         zoom,           {.f = -1} },
+	{ MODKEY,               XK_Home,         zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
+	{ MODKEY | ShiftMask,   XK_l,           copyurl,        {.i =  0} },
 	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
     { TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
     { ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
