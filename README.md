@@ -1,3 +1,11 @@
 ## patches
 - xresources
+- boxdraw
+- clipboard
+- copyurl
+- newterm
+- openclipboard
+- rightclickpaste
+- scrollback
+- scrollback-mouse
 ## todo
