@@ -180,7 +180,7 @@ static unsigned int defaultattr = 11;
  * Note that if you want to use ShiftMask with selmasks, set this to an other
  * modifier, set to 0 to not use it.
  */
-static uint forcemousemod = ShiftMask;
+static uint forcemousemod = 0;
 
 /*
  * Xresources preferences to load at startup
@@ -234,7 +234,7 @@ static MouseShortcut mshortcuts[] = {
 };
 
 /* Internal keyboard shortcuts. */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
@@ -243,22 +243,20 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ MODKEY,               XK_Prior,        zoom,           {.f = +1} },
-	{ MODKEY,               XK_Next,         zoom,           {.f = -1} },
-	{ MODKEY,               XK_Home,         zoomreset,      {.f =  0} },
-	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
-	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
-	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+	{ MODKEY,               XK_minus,       zoom,           {.f = +1} },
+	{ MODKEY,               XK_plus,        zoom,           {.f = -1} },
+	{ MODKEY | ShiftMask,   XK_minus,       zoomreset,      {.f =  0} },
+	{ TERMMOD,              XK_c,           clipcopy,       {.i =  0} },
+	{ TERMMOD,              XK_v,           clippaste,      {.i =  0} },
+	{ TERMMOD,              XK_y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY | ShiftMask,   XK_l,           copyurl,        {.i =  0} },
-	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
-    { TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
-    { ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
-    { TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+	{ MODKEY,               XK_u,           copyurl,        {.i =  0} },
     { MODKEY,               XK_o,           opencopied,     {.v = "xdg-open"} },
-    { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
-    { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
+	{ MODKEY,               XK_m,           newterm,       {.i =  0} },
+    { TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+    { MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
+    { MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
 
 /*
@@ -330,8 +328,7 @@ static Key key[] = {
 	{ XK_KP_Insert,     ShiftMask,      "\033[4l",      -1,    0},
 	{ XK_KP_Insert,     ControlMask,    "\033[L",       -1,    0},
 	{ XK_KP_Insert,     ControlMask,    "\033[2;5~",    +1,    0},
-	{ XK_KP_Insert,     XK_ANY_MOD,     "\033[4h",      -1,    0},
-	{ XK_KP_Insert,     XK_ANY_MOD,     "\033[2~",      +1,    0},
+	{ XK_KP_Insert,     XK_ANY_MOD,     "\033[4h",      -1,    0}, { XK_KP_Insert,     XK_ANY_MOD,     "\033[2~",      +1,    0},
 	{ XK_KP_Delete,     ControlMask,    "\033[M",       -1,    0},
 	{ XK_KP_Delete,     ControlMask,    "\033[3;5~",    +1,    0},
 	{ XK_KP_Delete,     ShiftMask,      "\033[2K",      -1,    0},
